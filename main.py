@@ -88,7 +88,7 @@ def main():
 
     # start graphical user interface
     app = wx.App()
-    layout = FilterLayout(capture, title='Fun with Filters')
+    layout = FilterLayout(capture, title='Image Filter')
     layout.Center()
     layout.Show()
     app.MainLoop()
