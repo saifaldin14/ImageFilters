@@ -55,6 +55,9 @@ def cartoonize(rgb_image, *, num_pyr_downs=2, num_bilaterals=7):
     # Use adaptive thresholding to detect and emphasize the edges in an edge mask
     gray_edges = cv2.adaptiveThreshold(img_blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 2)
 
+    # Combine the color image with the edge mask
+    rgb_edges = cv2.cvtColor(gray_edges, cv2.COLOR_GRAY2RGB)
+    return cv2.bitwise_and(filtered_normal_img, rgb_edges)
 
 
 def convert_to_pencil_sketch(rgb_image):
