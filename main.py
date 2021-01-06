@@ -77,9 +77,14 @@ class FilterLayout(BaseLayout):
 
 
 def main():
+    # open webcam
     capture = cv2.VideoCapture(0)
-    capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    # opening the channel ourselves, if it failed to open.
+    if not(capture.isOpened()):
+        capture.open()
+
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
     # start graphical user interface
     app = wx.App()
@@ -87,3 +92,7 @@ def main():
     layout.Center()
     layout.Show()
     app.MainLoop()
+
+
+if __name__ == '__main__':
+    main()
