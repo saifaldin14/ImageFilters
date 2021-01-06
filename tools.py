@@ -28,6 +28,13 @@ def apply_hue_filter(rgb_image, hue_filter):
     c_s = cv2.LUT(c_s, hue_filter).astype(np.uint8)
     return cv2.cvtColor(cv2.merge((c_h, c_s, c_v)), cv2.COLOR_RGB2HSV)
 
+@lru_cache(maxsize=32)
+def load_img_resized(path: str, dimensions: Tuple[int]):
+    img = cv2.imread(path)
+    if img is None:
+        return
+    return cv2.resize(img, dimensions)
+
 def cartoonize(rgb_image, *, num_pyr_downs=2, num_bilaterals=7):
     # Apply a bilateral filter to reduce the color palette of the image
     downsampled_img = rgb_image
